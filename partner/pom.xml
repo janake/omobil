@@ -16,7 +16,7 @@
 	<properties>
 		<java.version>1.8</java.version>
 		<pmdVersion>6.42.0</pmdVersion>
-		<pmdPluginVersion>3.14.0</pmdPluginVersion>
+		<pmdPluginVersion>3.16.0</pmdPluginVersion>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -71,22 +71,26 @@
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-pmd-plugin</artifactId>
 					<version>${pmdPluginVersion}</version>
-					<dependencies>
-						<dependency>
-							<groupId>net.sourceforge.pmd</groupId>
-							<artifactId>pmd-core</artifactId>
-							<version>${pmdVersion}</version>
-						</dependency>
-						<dependency>
-							<groupId>net.sourceforge.pmd</groupId>
-							<artifactId>pmd-java</artifactId>
-							<version>${pmdVersion}</version>
-						</dependency>
-					</dependencies>
 				</plugin>
 			</plugins>
 		</pluginManagement>
 		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-pmd-plugin</artifactId>
+				<configuration>
+					<failOnViolation>true</failOnViolation>
+					<printFailingErrors>true</printFailingErrors>
+				</configuration>
+				<executions>
+					<execution>
+						<id>pmd-check</id>
+						<goals>
+							<goal>check</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
